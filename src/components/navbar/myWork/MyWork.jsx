@@ -1,6 +1,6 @@
-import React from 'react'
-import Header from '../Header'
-import {importAll} from '../../../utils/importImages'
+import React, { useEffect, useState } from 'react'
+// import Header from '../navbar/Header'
+
 import banner from '../../../assets/0.jpg'
 // section 1
 import img1 from '../../../assets/1-unending/1.jpg'
@@ -24,17 +24,53 @@ import img18 from '../../../assets/1-unending/18.jpg'
 import img19 from '../../../assets/1-unending/19.jpg'
 import img20 from '../../../assets/1-unending/20.jpg'
 import img21 from '../../../assets/1-unending/21.jpg'
+import { importAll } from '../../../utils/importImages'
 function MyWork() {
   const imgSection1 = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21]
+  // const imgSection1 = importAll(require.context('../../../assets/1-unending', false, /\.(jpg|jpe?g|svg)$/));
   const imgSection2 = importAll(require.context('../../../assets/2-', false, /\.(jpg|jpe?g|svg)$/));
   const imgSection3 = importAll(require.context('../../../assets/3-', false, /\.(jpg|jpe?g|svg)$/));
   const imgSection4 = importAll(require.context('../../../assets/4-', false, /\.(jpg|jpe?g|svg)$/));
   const imgSection5 = importAll(require.context('../../../assets/5-', false, /\.(jpg|jpe?g|svg)$/));
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  console.log({selectedImage})
+  const openModal = (img,i) => {
+
+    setSelectedImage(img);
+    setIsOpen(true);
+    document.body.classList.add('no-scroll');
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+    setSelectedImage(null);
+    document.body.classList.remove('no-scroll');
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+  }, [isOpen]);
   return (
     <div>
       <div className="banner-img mb-5" style={{ width: "100dvw" }}>
         <img src={banner} alt="" style={{ width: "100%", height: "auto" }} />
       </div>
+
+      {isOpen &&
+      <div id="myModal" className="img-modal">
+
+            <span className="x-close" style={{backgroundColor: 'rgba(255,255,255,0'}}
+                  onClick={() => closeModal()}>&times;</span>
+
+            <img className="modal-content" src={selectedImage} />
+
+        </div>}
 
       <section className="section-1">
         <div className="my" style={{ textAlign: "center", paddingBottom: "" }}>
@@ -79,15 +115,15 @@ function MyWork() {
           >
             {imgSection1.map((img, index) => (
               <div className="col-md-4 col-sm-6 col-xs-12 my-3" key={index}>
-                <img
+                <img onClick={() => openModal(img)}
                   src={img}
                   alt=""
                   style={
                     img == img16 || img == img18 || img == img19 || img == img21
-                      ? { width: "100%", height: "auto", marginTop: "30%" }
+                      ? { width: "100%", height: "auto", marginTop: "30%", cursor:"pointer"  }
                       : img == img12 || img == img10 || img == img5
-                      ? { width: "100%", height: "auto", marginTop: "10%" }
-                      : { width: "100%", height: "auto" }
+                      ? { width: "100%", height: "auto", marginTop: "10%" , cursor:"pointer" }
+                      : { width: "100%", height: "auto" , cursor:"pointer" }
                   }
                 />
               </div>
@@ -133,17 +169,17 @@ function MyWork() {
           >
             {imgSection2.map((img, index) => (
               <div className="col-md-4 col-sm-6 col-xs-12 my-3" key={index}>
-                <img
+                <img onClick={() => openModal(img)}
                   src={img}
                   alt=""
                   style={
                     index == 0 || index == 2
-                      ? { width: "100%", height: "auto", marginTop: "30%" }
+                      ? { width: "100%", height: "auto", marginTop: "30%", cursor:"pointer" }
                       : index == 3
-                      ? { width: "100%", height: "auto", marginTop: "15%" }
+                      ? { width: "100%", height: "auto", marginTop: "15%", cursor:"pointer" }
                       : index == 7
-                      ? { width: "100%", height: "auto", marginTop: "10%" }
-                      : { width: "100%", height: "auto" }
+                      ? { width: "100%", height: "auto", marginTop: "10%", cursor:"pointer" }
+                      : { width: "100%", height: "auto", cursor:"pointer" }
                   }
                 />
               </div>
@@ -192,15 +228,15 @@ function MyWork() {
           >
             {imgSection3.map((img, index) => (
               <div className="col-md-4 col-sm-6 col-xs-12 my-3" key={index}>
-                <img
+                <img onClick={() => openModal(img)}
                   src={img}
                   alt=""
                   style={
                     index == 9 || index == 11
-                      ? { width: "100%", height: "auto", marginTop: "30%" }
+                      ? { width: "100%", height: "auto", marginTop: "30%" , cursor:"pointer" }
                       : index == 3 || index == 5
-                      ? { width: "100%", height: "auto", marginTop: "10%" }
-                      : { width: "100%", height: "auto" }
+                      ? { width: "100%", height: "auto", marginTop: "10%" , cursor:"pointer" }
+                      : { width: "100%", height: "auto" , cursor:"pointer" }
                   }
                 />
               </div>
@@ -248,15 +284,15 @@ Inspired by the rich cultural heritage of Morocco, adding layers of abstraction 
           >
             {imgSection4.map((img, index) => (
               <div className="col-md-4 col-sm-6 col-xs-12 my-3" key={index}>
-                <img
+                <img onClick={() => openModal(img)}
                   src={img}
                   alt=""
                   style={
                     index == 12 || index == 14 || index == 18 || index == 20
-                      ? { width: "100%", height: "auto", marginTop: "30%" }
+                      ? { width: "100%", height: "auto", marginTop: "30%", cursor:"pointer"  }
                       : index == 1 || index == 7
-                      ? { width: "100%", height: "auto", marginTop: "10%" }
-                      : { width: "100%", height: "auto" }
+                      ? { width: "100%", height: "auto", marginTop: "10%", cursor:"pointer"  }
+                      : { width: "100%", height: "auto", cursor:"pointer"  }
                   }
                 />
               </div>
@@ -304,15 +340,15 @@ Simplicity in tools, complexity in thought. With an iPhone 6, iPhone 8, and Niko
           >
             {imgSection5.map((img, index) => (
               <div className="col-md-4 col-sm-6 col-xs-12 my-3" key={index}>
-                <img
+                <img onClick={() => openModal(img)}
                   src={img}
                   alt=""
                   style={
                     index == 3 || index == 5 || index == 9 || index == 11 || index == 13  || index == 21 || index == 23 
-                      ? { width: "100%", height: "250px", marginTop: "35%" , objectFit:'cover'}
+                      ? { width: "100%", height: "250px", marginTop: "35%" , objectFit:'cover', cursor:"pointer" }
                       : index == 16 || index == 18 || index == 20 
-                      ?  { width: "100%",  marginTop: "35%" }: index == 27 ? {width: "100%",  height: "235px", marginTop: "", objectFit:'cover'} 
-                      : { width: "100%", height: "auto" }
+                      ?  { width: "100%",  marginTop: "35%" , cursor:"pointer" }: index == 27 ? {width: "100%",  height: "235px", marginTop: "", objectFit:'cover', cursor:"pointer" } 
+                      : { width: "100%", height: "auto" , cursor:"pointer" }
                   }
                 />
               </div>

@@ -18,6 +18,7 @@ function Header() {
   
     return null;
   }
+  
   return (
     <Navbar collapseOnSelect expand="lg" style={{backgroundColor:'#f0f0f0', position:'sticky', top:'0', zIndex:"9999",width:'100dvw'}} className="py-3">
       <Container>
@@ -34,9 +35,9 @@ function Header() {
               <Nav.Link style={{ fontSize: '18px', color: "#424242" }} className='mx-2'>ABOUT</Nav.Link>
             </LinkContainer>
             <a href='#contact' style={{textDecoration:'none'}}>
-              <Nav.Link href='#contact' style={{ fontSize: '18px', color: "#424242" }} className='mx-2'>CONTACT</Nav.Link>
+              <Nav.Link href='/#contact' style={{ fontSize: '18px', color: "#424242" }} className='mx-2'>CONTACT</Nav.Link>
             </a>
-            <Nav.Link href="https://www.instagram.com/jhsmail" target="_blank" rel="noopener noreferrer" className="mx-2">
+            <Nav.Link href="https://www.instagram.com/monochromeeye_?igsh=enFxcmJoOWF0bGkx&utm_source=qr" target="_blank" rel="noopener noreferrer" className="mx-2">
               <InstagramIcon style={{ color: '#424242', fontSize: '24px' }} />
             </Nav.Link>
           </Nav>
